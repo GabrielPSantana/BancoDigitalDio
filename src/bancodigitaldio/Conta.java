@@ -28,18 +28,32 @@ public abstract class Conta implements IConta {
 	
 	@Override
 	public void sacar(double valor) {
-		saldo -= valor;
+		
+		if(this.saldo < valor) {
+			System.out.println("Seu saldo é insuficiente");
+			System.out.println("Saldo Atual: " + saldo);
+		}else {
+			this.saldo -= valor;
+		}
 		
 	}
+	
 	@Override
 	public void depositar(double valor) {
 		saldo += valor;
-		
+		System.out.println("Saldo: " + saldo);
 	}
+	
 	@Override
 	public void transferir(double valor, Conta contaDestino) {
-		this.sacar(valor);
-		contaDestino.depositar(valor);
+		
+		if(this.saldo < valor) {
+			System.out.println("Seu saldo é insuficiente");
+			System.out.println("Saldo: " + saldo);
+		}else {
+			this.sacar(valor);
+			contaDestino.depositar(valor);			
+		}
 		
 	}
 	
